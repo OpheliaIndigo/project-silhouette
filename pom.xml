@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.silhouette</groupId>
-  <artifactId>project-manager</artifactId>
+  <artifactId>project-silhouette</artifactId>
   <version>0.0.1</version>
   <name>${project.artifactId}</name>
   <description>My wonderfull scala app</description>
@@ -55,6 +55,12 @@
       <version>${spec2.version}</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>com.lihaoyi</groupId>
+      <artifactId>os-lib_3</artifactId>
+      <version>0.10.3</version>
+  </dependency>
+
   </dependencies>
 
   <build>
@@ -77,6 +83,13 @@
                 <arg>-dependencyfile</arg>
                 <arg>${project.build.directory}/.scala_dependencies</arg>
               </args>
+              <launchers>
+                <launcher>
+                  <id>projectSilhouette</id>
+                  <mainClass>com.silhouette.App</mainClass>
+                </launcher>
+                <!-- you could define other launcher -->
+              </launchers>
             </configuration>
           </execution>
         </executions>

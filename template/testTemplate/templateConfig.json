@@ -1,0 +1,11 @@
+{
+    "name": "test",
+    "author": "Silhouette",
+    "notesDir": {
+        "path": "./notes"
+    },
+    "projectDir": {
+        "path": "./proj"
+    },
+    "startScript": null
+}
