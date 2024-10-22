@@ -13,7 +13,7 @@ def foo(x: Array[String]) = x.foldLeft("")((a, b) => a + b)
 @main def potato() =
     val projectBasePath = ProjectTemplateLocalPath(
       os.Path(
-        "/home/ophelia/silhouette/ProjectManager/project-silhouette/template"
+        "C:/Users/ophel/Projects/project-silhouette/template"
       )
     )
 
@@ -32,7 +32,7 @@ def foo(x: Array[String]) = x.foldLeft("")((a, b) => a + b)
       "Ophelia",
       List(
         projectProjPath,
-        projectNotesPath
+        // projectNotesPath
       )
     )
-    Project("Potato", "Ophelia", testProjTempl, projectOutPath).init()
+    Project("Potato", "Ophelia", testProjTempl, projectOutPath).init(true)

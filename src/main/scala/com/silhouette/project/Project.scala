@@ -6,8 +6,8 @@ case class Project(
     val template: ProjectTemplate,
     val location: ProjectTemplatePath
 ) {
-    def init() = {
-        template.initProjectFolders(location)
+    def init(replaceExisting: Boolean = false) = {
+        template.initProjectFolders(location, replaceExisting)
         
     }
 }
