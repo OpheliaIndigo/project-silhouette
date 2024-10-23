@@ -59,8 +59,12 @@
       <groupId>com.lihaoyi</groupId>
       <artifactId>os-lib_3</artifactId>
       <version>0.10.3</version>
-  </dependency>
-
+    </dependency>
+    <dependency>
+      <groupId>com.lihaoyi</groupId>
+      <artifactId>upickle_3</artifactId>
+      <version>4.0.2</version>
+    </dependency>
   </dependencies>
 
   <build>

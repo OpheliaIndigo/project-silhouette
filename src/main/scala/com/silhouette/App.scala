@@ -3,6 +3,7 @@ package com.silhouette
 import com.silhouette.project.Project
 import com.silhouette.project.BasicProjectTemplate
 import com.silhouette.project.ProjectTemplateLocalPath
+import java.nio.file.Path
 
 /** @author
   *   ${user.name}
@@ -11,10 +12,9 @@ import com.silhouette.project.ProjectTemplateLocalPath
 def foo(x: Array[String]) = x.foldLeft("")((a, b) => a + b)
 
 @main def potato() =
+    
     val projectBasePath = ProjectTemplateLocalPath(
-      os.Path(
-        "C:/Users/ophel/Projects/project-silhouette/template"
-      )
+      os.Path("C:/Users/ophel/Projects/project-silhouette/template")
     )
 
     val projectProjPath = ProjectTemplateLocalPath(
@@ -31,7 +31,7 @@ def foo(x: Array[String]) = x.foldLeft("")((a, b) => a + b)
       "Test Template",
       "Ophelia",
       List(
-        projectProjPath,
+        projectProjPath
         // projectNotesPath
       )
     )
