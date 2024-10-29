@@ -2,6 +2,7 @@ package com.silhouette.project
 
 import upickle.default._
 import os.Path
+import os.PermSet
 
 implicit val pathReadWrite: ReadWriter[Path] =
     upickle.default.readwriter[String].bimap[Path](
@@ -9,35 +10,39 @@ implicit val pathReadWrite: ReadWriter[Path] =
         str => Path(str)
     )
 
-sealed trait ProjectTemplatePath {
+sealed trait ProjectPath {
     def createIfNotExists(): Unit
+    def writeFile(filename: String, contents: String): Unit
 }
-case class ProjectTemplateLocalPath(path: os.Path) extends ProjectTemplatePath derives ReadWriter{
+case class ProjectLocalPath(path: os.Path) extends ProjectPath derives ReadWriter{
     override def createIfNotExists(): Unit =
         os.makeDir.all(path)
+    
+    override def writeFile(filename: String, fileContents: String): Unit = 
+        os.write.over(path / filename, fileContents)
 }
 
 sealed trait ProjectTemplate derives ReadWriter{
     val name: String // Project Template Name
     val author: String // Project Template Author
-    val dirs: List[ProjectTemplateLocalPath]
+    val dirs: List[ProjectLocalPath]
 
-    def initProjectFolders(newDir: ProjectTemplatePath, replaceExisting: Boolean): Unit
+    def initProjectFolders(newDir: ProjectPath, replaceExisting: Boolean): Unit
 }
 
 case class BasicProjectTemplate(
     val name: String,
     val author: String,
-    val dirs: List[ProjectTemplateLocalPath]
+    val dirs: List[ProjectLocalPath]
 
 ) extends ProjectTemplate {
     override def initProjectFolders(
-        newDir: ProjectTemplatePath,
+        newDir: ProjectPath,
         replaceExisting: Boolean
     ): Unit = {
         newDir.createIfNotExists()
         newDir match
-            case ProjectTemplateLocalPath(path) =>
+            case ProjectLocalPath(path) =>
                 dirs.map((dir) =>
                     os.copy.into(
                       dir.path,
