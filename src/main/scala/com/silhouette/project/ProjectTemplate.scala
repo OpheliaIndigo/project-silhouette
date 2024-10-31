@@ -13,6 +13,8 @@ implicit val pathReadWrite: ReadWriter[Path] =
 sealed trait ProjectPath {
     def createIfNotExists(): Unit
     def writeFile(filename: String, contents: String): Unit
+    def readProject(): Option[Project]
+
 }
 case class ProjectLocalPath(path: os.Path) extends ProjectPath derives ReadWriter{
     override def createIfNotExists(): Unit =
@@ -20,6 +22,12 @@ case class ProjectLocalPath(path: os.Path) extends ProjectPath derives ReadWrite
     
     override def writeFile(filename: String, fileContents: String): Unit = 
         os.write.over(path / filename, fileContents)
+
+    override def readProject(): Option[Project] =
+        if (os.list(path).find(p => p.getSegment(-1) == ".slh.json").isDefined) {
+            return Some(read[Project](os.read(path / ".slh.json")))
+        }
+        return None
 }
 
 sealed trait ProjectTemplate derives ReadWriter{

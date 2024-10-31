@@ -5,8 +5,7 @@ import upickle.default._
 case class Project(
     val name: String,
     val author: String,
-    val template: ProjectTemplate,
-    val uuid: String
+    val template: ProjectTemplate
 ) derives ReadWriter {
 
     def init(location: ProjectPath, replaceExisting: Boolean = false) = {

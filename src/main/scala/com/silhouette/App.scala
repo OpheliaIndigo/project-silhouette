@@ -34,4 +34,4 @@ def foo(x: Array[String]) = x.foldLeft("")((a, b) => a + b)
         // projectNotesPath
       )
     )
-    Project("Potato", "Ophelia", testProjTempl, java.util.UUID.randomUUID.toString).init(projectOutPath, true)
+    Project("Potato", "Ophelia", testProjTempl).init(projectOutPath, true)
