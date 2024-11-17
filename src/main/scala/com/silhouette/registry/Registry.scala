@@ -17,19 +17,17 @@ import com.silhouette.project.ProjectTemplate
 def getUUID(): String =
     java.util.UUID.randomUUID.toString
 
-class Registry {
-    var projects: Map[String, Project] = Map.empty[String, Project]
-    var projectTemplates: Map[String, ProjectTemplate] = Map.empty[String, ProjectTemplate]
+class Registry[T] {
+    var items: Map[String, T] = Map.empty[String, T]
 
-    def registerProject(proj: Project): Unit =
-        projects(getUUID()) = proj
+    def registeritems(item: T): Unit =
+        items(getUUID()) = item
     
-    def assignProjectIds(projs: List[Project]): List[(String, Project)] =
-        projs.map(p => (getUUID() -> p))
+    def assignIds(itemList: List[T]): List[(String, T)] =
+        itemList.map(p => (getUUID() -> p))
     
-    def registerProjects(projs: List[Project]): Unit =
-        projects.addAll(assignProjectIds(projs))
-
+    def registerProjects(itemList: List[T]): Unit =
+        items.addAll(assignIds(itemList))
 }
 
 def collectRegistryProjectDetails(projPath: ProjectPath) =
