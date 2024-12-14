@@ -7,6 +7,7 @@ import com.silhouette.project.Project
 
 import scala.collection.mutable._
 import com.silhouette.project.ProjectTemplate
+import scala.annotation.static
 
 // Registry has a location (folder)
 // Registry contains a list of projects and templates
@@ -20,14 +21,15 @@ def getUUID(): String =
 class Registry[T] {
     var items: Map[String, T] = Map.empty[String, T]
 
-    def registeritems(item: T): Unit =
+    def registerItem(item: T): Unit =
         items(getUUID()) = item
     
     def assignIds(itemList: List[T]): List[(String, T)] =
         itemList.map(p => (getUUID() -> p))
     
-    def registerProjects(itemList: List[T]): Unit =
+    def registerItems(itemList: List[T]): Unit =
         items.addAll(assignIds(itemList))
+
 }
 
 def collectRegistryProjectDetails(projPath: ProjectPath) =

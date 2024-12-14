@@ -10,6 +10,8 @@ implicit val pathReadWrite: ReadWriter[Path] =
         str => Path(str)
     )
 
+sealed trait Readable
+
 sealed trait ProjectPath {
     def createIfNotExists(): Unit
     def writeFile(filename: String, contents: String): Unit
@@ -43,7 +45,7 @@ case class BasicProjectTemplate(
     val author: String,
     val dirs: List[ProjectLocalPath]
 
-) extends ProjectTemplate {
+) extends ProjectTemplate{
     override def initProjectFolders(
         newDir: ProjectPath,
         replaceExisting: Boolean
